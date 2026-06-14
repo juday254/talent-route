@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Opportunity - TalentRoute</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('_header') %>
+
+    <main>
+        <div class="page-header">
+            <h1>Post an Opportunity</h1>
+            <p>Connect with talented athletes across Kenya and beyond</p>
+        </div>
+
+        <div class="form-container">
+            <form action="/addopportunity" method="POST">
+                <div class="form-group">
+                    <label for="title">Opportunity Title</label>
+                    <input type="text" id="title" name="title" placeholder="e.g. Athletics Track & Field Scholarship" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" placeholder="Describe the opportunity"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" placeholder="e.g. Nairobi, Kenya">
+                </div>
+                <div class="form-group">
+                    <label for="university">University / Organization</label>
+                    <input type="text" id="university" name="university" placeholder="e.g. University of Nairobi">
+                </div>
+                <div class="form-group">
+                    <label for="requirements">Requirements</label>
+                    <textarea id="requirements" name="requirements" placeholder="List the requirements"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="application_link">Application Link</label>
+                    <input type="url" id="application_link" name="application_link" placeholder="https://...">
+                </div>
+
+                <button type="submit" class="btn" style="width:100%">Post Opportunity</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

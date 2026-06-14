@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opportunities - TalentRoute</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('_header') %>
+
+    <main>
+        <!-- PAGE HEADER -->
+        <section class="page-header">
+            <h1>Scholarship Opportunities</h1>
+            <p>Explore world-class sports scholarships and development programs</p>
+        </section>
+
+        <!-- SEARCH & FILTERS -->
+        <div class="container">
+            <div class="filter-section">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search opportunities by title or university...">
+                    <button onclick="filterOpportunities()">Search</button>
+                </div>
+                <div class="filter-grid">
+                    <div class="form-group">
+                        <label for="locationFilter">Filter by Location:</label>
+                        <select id="locationFilter" onchange="filterOpportunities()">
+                            <option value="">All Locations</option>
+                            <option value="Kenya">Kenya</option>
+                            <option value="USA">USA</option>
+                            <option value="UK">UK</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="typeFilter">Filter by Type:</label>
+                        <select id="typeFilter" onchange="filterOpportunities()">
+                            <option value="">All Types</option>
+                            <option value="Full Scholarship">Full Scholarship</option>
+                            <option value="Partial">Partial Support</option>
+                            <option value="Development">Development Program</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; align-items: flex-end;">
+                        <button onclick="resetFilters()" style="width: 100%; padding: 12px; background-color: #666; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-weight: 600;">Reset Filters</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OPPORTUNITIES GRID -->
+            <div id="opportunitiesContainer" class="cards-grid">
+                <!-- JavaScript will populate this -->
+            </div>
+            <div id="noResults" class="no-results" style="display: none;">
+                <p>No opportunities found matching your criteria. Try adjusting your filters.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 TalentRoute. All rights reserved.</p>
+        <p>Connecting athletic talent with opportunities worldwide</p>
+    </footer>
+
+    <script>
+        const opportunities = [
+            {
+                id: 1,
+                title: 'Athletics Track & Field Scholarship',
+                description: 'Full athletic scholarship for elite mid-distance runners.',
+                location: 'Oregon, USA',
+                university: 'University of Oregon',
+                requirements: 'Sub 3:45 for 1500m (Men), Sub 4:10 (Women), High school certificate with C+ minimum.',
+                link: 'https://goducks.com/sports/scholarships',
+                type: 'Full Scholarship'
+            },
+            {
+                id: 2,
+                title: 'Elite Basketball Talent Program',
+                description: 'Sports scholarship covering tuition, housing, and training kits.',
+                location: 'Nairobi, Kenya',
+                university: 'United States International University (USIU-A)',
+                requirements: 'Must have played in the national secondary school finals or local league. KCSE C+ and above.',
+                link: 'https://usiu.ac.ke/sports-scholarships',
+                type: 'Full Scholarship'
+            },
+            {
+                id: 3,
+                title: 'Collegiate Rugby Scholarship',
+                description: 'Opportunity to join a premier rugby program with partial academic funding.',
+                location: 'Texas, USA',
+                university: 'Lindenwood University',
+                requirements: 'Video highlights of regional/national matches, reference letter from a certified coach, SAT score of 1050+.',
+                link: 'https://lindenwoodlions.com/apply',
+                type: 'Partial'
+            },
+            {
+                id: 4,
+                title: 'High-Performance Football Scouting',
+                description: 'Full tuition scholarship for exceptionally talented midfielders and forwards.',
+                location: 'Strathmore, Kenya',
+                university: 'Strathmore University',
+                requirements: 'KCSE grade B- and above, trial attendance required, provincial level experience.',
+                link: 'https://strathmore.edu/sports-scholarship',
+                type: 'Full Scholarship'
+            },
+            {
+                id: 5,
+                title: 'NCAA Division 1 Soccer Scholarship',
+                description: 'Full ride soccer scholarship for international student-athletes.',
+                location: 'South Carolina, USA',
+                university: 'Clemson University',
+                requirements: 'NCAA Eligibility Center clearance, TOEFL/IELTS pass, highlight reel.',
+                link: 'https://clemsontigers.com/soccer-recruitment',
+                type: 'Full Scholarship'
+            },
+            {
+                id: 6,
+                title: 'Full Track & Field Athletic Grant',
+                description: 'Sponsorship targeting high-potential sprinters and long-distance runners.',
+                location: 'Texas, USA',
+                university: 'Texas A&M University',
+                requirements: 'IAAF junior rankings or equivalent national times, GPA conversion equivalent to 3.0+.',
+                link: 'https://12thman.com/athletic-scholarships',
+                type: 'Full Scholarship'
+            },
+            {
+                id: 7,
+                title: 'National Volleyball League Talent Hunt',
+                description: 'Sports tuition waiver and monthly stipend for top volleyball setters and blockers.',
+                location: 'Nairobi, Kenya',
+                university: 'Kenyatta University',
+                requirements: 'KCSE C+ minimum, participation in KVF national youth tournaments.',
+                link: 'https://ku.ac.ke/sports',
+                type: 'Partial'
+            },
+            {
+                id: 8,
+                title: 'Elite Field Hockey Academic-Athletic Grant',
+                description: 'Scholarship for outstanding female hockey players.',
+                location: 'Birmingham, UK',
+                university: 'University of Birmingham',
+                requirements: 'A-level equivalent or KCSE B, video portfolio, national youth team caps preferred.',
+                link: 'https://sportandfitness.bham.ac.uk/scholarships',
+                type: 'Full Scholarship'
+            },
+            {
+                id: 9,
+                title: 'College Rugby Development Scholarship',
+                description: 'Scholarship aiming to develop international rugby talent in the US collegiate system.',
+                location: 'California, USA',
+                university: 'Saint Marys College of California',
+                requirements: 'High school graduate, recommendation from national rugby federation (KRU), physical fitness test pass.',
+                link: 'https://stmarys-ca.edu/rugby-recruits',
+                type: 'Development Program'
+            },
+            {
+                id: 10,
+                title: 'Vanguard Basketball Sports Scholarship',
+                description: 'Full athletic waiver for dominant centers and point guards.',
+                location: 'Nairobi, Kenya',
+                university: 'Strathmore University',
+                requirements: 'KCSE C+ and above, elite level high school statistics, mandatory physical tryouts.',
+                link: 'https://strathmore.edu/vanguard-sports',
+                type: 'Full Scholarship'
+            }
+        ];
+
+        function displayOpportunities(data) {
+            const container = document.getElementById('opportunitiesContainer');
+            const noResults = document.getElementById('noResults');
+
+            if (data.length === 0) {
+                container.innerHTML = '';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            noResults.style.display = 'none';
+            container.innerHTML = data.map(opp => `
+                <div class="card">
+                    <div class="card-header">
+                        <h3>${opp.title}</h3>
+                        <span class="badge">${opp.type}</span>
+                    </div>
+                    <div class="card-content">
+                        <p><strong>University:</strong> ${opp.university}</p>
+                        <p><strong>Location:</strong> ${opp.location}</p>
+                        <p><strong>Description:</strong> ${opp.description}</p>
+                        <p><strong>Requirements:</strong> ${opp.requirements}</p>
+                        <a href="${opp.link}" target="_blank" class="btn" style="margin-top: 15px; display: inline-block;">Apply Now</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterOpportunities() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const locationFilter = document.getElementById('locationFilter').value;
+            const typeFilter = document.getElementById('typeFilter').value;
+
+            const filtered = opportunities.filter(opp => {
+                const matchesSearch = opp.title.toLowerCase().includes(searchTerm) ||
+                                    opp.university.toLowerCase().includes(searchTerm);
+                const matchesLocation = !locationFilter || opp.location.includes(locationFilter);
+                const matchesType = !typeFilter || opp.type.includes(typeFilter);
+
+                return matchesSearch && matchesLocation && matchesType;
+            });
+
+            displayOpportunities(filtered);
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('locationFilter').value = '';
+            document.getElementById('typeFilter').value = '';
+            displayOpportunities(opportunities);
+        }
+
+        // Initial display
+        displayOpportunities(opportunities);
+
+        // Search on Enter key
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                filterOpportunities();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talents - TalentRoute</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('_header') %>
+
+    <main>
+        <!-- PAGE HEADER -->
+        <section class="page-header">
+            <h1>Registered Talents</h1>
+            <p>Discover elite athletes across Kenya competing at the highest levels</p>
+        </section>
+
+        <!-- SEARCH & FILTERS -->
+        <div class="container">
+            <div class="filter-section">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search by name or sport...">
+                    <button onclick="filterTalents()">Search</button>
+                </div>
+                <div class="filter-grid">
+                    <div class="form-group">
+                        <label for="sportFilter">Filter by Sport:</label>
+                        <select id="sportFilter" onchange="filterTalents()">
+                            <option value="">All Sports</option>
+                            <option value="Football">Football</option>
+                            <option value="Athletics">Athletics</option>
+                            <option value="Basketball">Basketball</option>
+                            <option value="Rugby">Rugby</option>
+                            <option value="Volleyball">Volleyball</option>
+                            <option value="Hockey">Hockey</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="educationFilter">Filter by Education Level:</label>
+                        <select id="educationFilter" onchange="filterTalents()">
+                            <option value="">All Levels</option>
+                            <option value="High School">High School</option>
+                            <option value="Undergraduate">Undergraduate</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; align-items: flex-end;">
+                        <button onclick="resetFilters()" style="width: 100%; padding: 12px; background-color: #666; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-weight: 600;">Reset Filters</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TALENTS GRID -->
+            <div class="cards-grid">
+                <% talents.forEach(talent =>{
+                    %>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><%= talent.fullname %></h3>
+                            <span class="sport-badge"><%= talent.sport %></span>
+
+                        </div>
+                        <div class="card-content">
+                            <p><strong>DoB:</strong> years old</p>
+                            <p><strong>Sport:</strong> <%= talent.sport %></p>
+                            <p><strong>Education Level:</strong> <span class="badge"><%= talent.education_level %></span></p>
+                            <p><strong>Achievement:</strong> <%= talent.highest_achievement %></p>
+                            <p><strong>Contact:</strong></p>
+                            <p>📧 <%= talent.email %></p>
+                            <p>📱 <%= talent.phone %></p>
+                        </div>
+                    </div>
+                    <%
+                }) %>
+            </div>
+            <div id="noResults" class="no-results" style="display: none;">
+                <p>No talents found matching your criteria. Try adjusting your filters.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 TalentRoute. All rights reserved.</p>
+        <p>Connecting athletic talent with opportunities worldwide</p>
+    </footer>
+
+    <script>
+        const talents = [
+            {
+                email: 'brian.omondi@gmail.com',
+                fullname: 'Brian Omondi',
+                sport: 'Football',
+                dob: '2004-05-14',
+                phone: '+254711223344',
+                achievement: 'Top scorer in Chapa Dimba na Safaricom regional finals',
+                education: 'High School'
+            },
+            {
+                email: 'faith.chepngetich@yahoo.com',
+                fullname: 'Faith Chepngetich',
+                sport: 'Athletics',
+                dob: '2005-08-22',
+                phone: '+254722334455',
+                achievement: 'Gold medal in 1500m at East Africa Secondary School Games',
+                education: 'High School'
+            },
+            {
+                email: 'emmanuel.kiprop@outlook.com',
+                fullname: 'Emmanuel Kiprop',
+                sport: 'Athletics',
+                dob: '2003-11-02',
+                phone: '+254733445566',
+                achievement: 'Represented Kenya in World U20 Athletics Championships',
+                education: 'Undergraduate'
+            },
+            {
+                email: 'mercy.wambui@gmail.com',
+                fullname: 'Mercy Wambui',
+                sport: 'Basketball',
+                dob: '2004-01-30',
+                phone: '+254744556677',
+                achievement: 'MVP at the Kajiado County Secondary Schools Basketball finals',
+                education: 'High School'
+            },
+            {
+                email: 'kevin.otieno@hotmail.com',
+                fullname: 'Kevin Otieno',
+                sport: 'Rugby',
+                dob: '2002-07-19',
+                phone: '+254755667788',
+                achievement: 'Called up to the Kenya 7s (Shujaa) academy squad',
+                education: 'Undergraduate'
+            },
+            {
+                email: 'stacy.mwende@gmail.com',
+                fullname: 'Stacy Mwende',
+                sport: 'Volleyball',
+                dob: '2005-03-12',
+                phone: '+254766778899',
+                achievement: 'Best Setter award at national school games',
+                education: 'High School'
+            },
+            {
+                email: 'david.ndwiga@yahoo.com',
+                fullname: 'David Ndwiga',
+                sport: 'Football',
+                dob: '2003-09-25',
+                phone: '+254777889900',
+                achievement: 'Played for FKF Premier League youth side',
+                education: 'Undergraduate'
+            },
+            {
+                email: 'amina.ali@gmail.com',
+                fullname: 'Amina Ali',
+                sport: 'Hockey',
+                dob: '2004-12-05',
+                phone: '+254788990011',
+                achievement: 'Captain of the national high school champions team',
+                education: 'High School'
+            },
+            {
+                email: 'victor.kamau@gmail.com',
+                fullname: 'Victor Kamau',
+                sport: 'Rugby',
+                dob: '2005-02-17',
+                phone: '+254799001122',
+                achievement: 'Part of the Mwamba RFC youth development program',
+                education: 'High School'
+            },
+            {
+                email: 'joyce.atieno@outlook.com',
+                fullname: 'Joyce Atieno',
+                sport: 'Basketball',
+                dob: '2002-10-10',
+                phone: '+254712345678',
+                achievement: 'Led KPA youth team to regional club victory',
+                education: 'Undergraduate'
+            }
+        ];
+
+        function calculateAge(dob) {
+            const today = new Date();
+            const birthDate = new Date(dob);
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        function displayTalents(data) {
+            const container = document.getElementById('talentsContainer');
+            const noResults = document.getElementById('noResults');
+
+            if (data.length === 0) {
+                container.innerHTML = '';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            noResults.style.display = 'none';
+            container.innerHTML = data.map(talent => {
+                const age = calculateAge(talent.dob);
+                return `
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>${talent.fullname}</h3>
+                            <span class="sport-badge">${talent.sport}</span>
+                        </div>
+                        <div class="card-content">
+                            <p><strong>Age:</strong> ${age} years old</p>
+                            <p><strong>Sport:</strong> ${talent.sport}</p>
+                            <p><strong>Education Level:</strong> <span class="badge">${talent.education}</span></p>
+                            <p><strong>Achievement:</strong> ${talent.achievement}</p>
+                            <p><strong>Contact:</strong></p>
+                            <p>📧 ${talent.email}</p>
+                            <p>📱 ${talent.phone}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function filterTalents() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const sportFilter = document.getElementById('sportFilter').value;
+            const educationFilter = document.getElementById('educationFilter').value;
+
+            const filtered = talents.filter(talent => {
+                const matchesSearch = talent.fullname.toLowerCase().includes(searchTerm) ||
+                                    talent.sport.toLowerCase().includes(searchTerm);
+                const matchesSport = !sportFilter || talent.sport === sportFilter;
+                const matchesEducation = !educationFilter || talent.education === educationFilter;
+
+                return matchesSearch && matchesSport && matchesEducation;
+            });
+
+            displayTalents(filtered);
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('sportFilter').value = '';
+            document.getElementById('educationFilter').value = '';
+            displayTalents(talents);
+        }
+
+        // Initial display
+        displayTalents(talents);
+
+        // Search on Enter key
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                filterTalents();
+            }
+        });
+    </script>
+</body>
+</html>

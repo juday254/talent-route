@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - TalentRoute</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('_header') %>
+
+    <main>
+        <!-- PAGE HEADER -->
+        <section class="page-header">
+            <h1>Get in Touch</h1>
+            <p>Have questions? We'd love to hear from you</p>
+        </section>
+
+        <!-- CONTACT CONTENT -->
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin: 60px 0; align-items: start;">
+                <!-- INFO SECTION -->
+                <div>
+                    <h2 style="font-size: 28px; margin-bottom: 30px; color: var(--primary);">Contact Information</h2>
+
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--text);">📍 Address</h3>
+                        <p style="color: #666; line-height: 1.8;">
+                            TalentRoute Ltd<br>
+                            Nairobi, Kenya<br>
+                            East Africa
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--text);">📧 Email</h3>
+                        <p style="color: #666;">
+                            <a href="mailto:info@talentroute.com" style="color: var(--primary); text-decoration: none;">info@talentroute.com</a><br>
+                            <a href="mailto:support@talentroute.com" style="color: var(--primary); text-decoration: none;">support@talentroute.com</a>
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--text);">📱 Phone</h3>
+                        <p style="color: #666;">
+                            <a href="tel:+254712345678" style="color: var(--primary); text-decoration: none;">+254 712 345 678</a><br>
+                            <a href="tel:+254722345678" style="color: var(--primary); text-decoration: none;">+254 722 345 678</a>
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--text);">🕐 Business Hours</h3>
+                        <p style="color: #666;">
+                            Monday - Friday: 9:00 AM - 6:00 PM<br>
+                            Saturday: 10:00 AM - 4:00 PM<br>
+                            Sunday: Closed
+                        </p>
+                    </div>
+
+                    <div style="background-color: var(--light-gray); padding: 20px; border-radius: 8px; border-left: 4px solid var(--primary);">
+                        <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--primary);">Quick Response</h3>
+                        <p style="color: #666; font-size: 14px;">
+                            We aim to respond to all inquiries within 24 hours. For urgent matters, please call us during business hours.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- CONTACT FORM -->
+                <div class="form-container" style="background-color: white; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); border: 1px solid var(--border);">
+                    <h2 style="font-size: 24px; margin-bottom: 25px; color: var(--primary);">Send us a Message</h2>
+
+                    <form id="contactForm" onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a subject...</option>
+                                <option value="athlete">I'm an Athlete</option>
+                                <option value="university">I'm from a University</option>
+                                <option value="sponsor">Sponsorship Inquiry</option>
+                                <option value="partnership">Partnership Opportunity</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="agree" name="agree" required style="width: auto; margin-right: 8px;">
+                                I agree to be contacted about my inquiry
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn" style="width: 100%; text-align: center;">Send Message</button>
+                        <p id="formStatus" style="text-align: center; margin-top: 15px; display: none; font-weight: 600;"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ SECTION -->
+        <section style="background-color: var(--light-gray); padding: 60px 40px;">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <div style="margin-bottom: 25px;">
+                        <h3 style="color: var(--primary); margin-bottom: 10px; cursor: pointer; font-size: 16px;" onclick="toggleFAQ(this)">▶ How do I register as a talent?</h3>
+                        <p style="color: #666; display: none;" class="faq-answer">You can browse available opportunities on our platform and apply directly to scholarships that match your profile. Contact us for assistance with your registration.</p>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <h3 style="color: var(--primary); margin-bottom: 10px; cursor: pointer; font-size: 16px;" onclick="toggleFAQ(this)">▶ What sports are covered?</h3>
+                        <p style="color: #666; display: none;" class="faq-answer">We cover a wide range of sports including Football, Athletics, Basketball, Rugby, Volleyball, Hockey, and more. New sports are added regularly.</p>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <h3 style="color: var(--primary); margin-bottom: 10px; cursor: pointer; font-size: 16px;" onclick="toggleFAQ(this)">▶ Are there opportunities outside Kenya?</h3>
+                        <p style="color: #666; display: none;" class="faq-answer">Yes! We have partnerships with universities in the USA, UK, and other countries. Our platform connects you with global opportunities.</p>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <h3 style="color: var(--primary); margin-bottom: 10px; cursor: pointer; font-size: 16px;" onclick="toggleFAQ(this)">▶ How much does it cost to use TalentRoute?</h3>
+                        <p style="color: #666; display: none;" class="faq-answer">Registration and browsing opportunities on TalentRoute is completely free for athletes and talents.</p>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <h3 style="color: var(--primary); margin-bottom: 10px; cursor: pointer; font-size: 16px;" onclick="toggleFAQ(this)">▶ How do I upload my profile and documents?</h3>
+                        <p style="color: #666; display: none;" class="faq-answer">Please contact us through this form and our team will guide you through the profile setup and document upload process.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 TalentRoute. All rights reserved.</p>
+        <p>Connecting athletic talent with opportunities worldwide</p>
+        <p><a href="/">Home</a> | <a href="/talents">Talents</a> | <a href="/opportunities">Opportunities</a></p>
+    </footer>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date().toLocaleString()
+            };
+
+            const statusDiv = document.getElementById('formStatus');
+
+            // Validate form
+            if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+                statusDiv.textContent = 'Please fill in all required fields.';
+                statusDiv.style.color = 'var(--danger)';
+                statusDiv.style.display = 'block';
+                return;
+            }
+
+            // Show success message
+            statusDiv.textContent = '✓ Thank you! Your message has been sent successfully. We will get back to you soon.';
+            statusDiv.style.color = 'var(--success)';
+            statusDiv.style.display = 'block';
+
+            // Store in localStorage for demo purposes
+            let messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+            messages.push(formData);
+            localStorage.setItem('contactMessages', JSON.stringify(messages));
+
+            // Reset form
+            document.getElementById('contactForm').reset();
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isVisible = answer.style.display !== 'none';
+
+            // Close all other FAQs
+            document.querySelectorAll('.faq-answer').forEach(faq => {
+                faq.style.display = 'none';
+            });
+            document.querySelectorAll('h3[onclick]').forEach(h3 => {
+                h3.textContent = h3.textContent.replace('▼', '▶');
+            });
+
+            // Toggle current
+            if (!isVisible) {
+                answer.style.display = 'block';
+                element.textContent = element.textContent.replace('▶', '▼');
+            }
+        }
+    </script>
+</body>
+</html>
