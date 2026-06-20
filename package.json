@@ -3,7 +3,7 @@
   "lockfileVersion": 3,
   "requires": true,
   "scripts": {
-    "dev":"nodemon app.js"
+    "dev": "nodemon app.js"
   },
   "packages": {
     "": {
@@ -975,8 +975,10 @@
     }
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "ejs": "^6.0.1",
     "express": "^5.2.1",
+    "express-session": "^1.19.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.22.5"
   }

@@ -10,13 +10,11 @@
     <%- include('_header') %>
 
     <main>
-        <!-- PAGE HEADER -->
         <section class="page-header">
             <h1>Registered Talents</h1>
             <p>Discover elite athletes across Kenya competing at the highest levels</p>
         </section>
 
-        <!-- SEARCH & FILTERS -->
         <div class="container">
             <div class="filter-section">
                 <div class="search-bar">
@@ -50,7 +48,6 @@
                 </div>
             </div>
 
-            <!-- TALENTS GRID -->
             <div class="cards-grid">
                 <% talents.forEach(talent =>{
                     %>
@@ -68,6 +65,10 @@
                             <p><strong>Contact:</strong></p>
                             <p>📧 <%= talent.email %></p>
                             <p>📱 <%= talent.phone %></p>
+                             <form action="/deletetalent" method="POST" style="margin-top:10px">
+                                <input type="hidden" name="email" value="<%= talent.email %>">
+                                <button type="submit" class="btn" style="background-color:#ef4444">Delete</button>
+                            </form>
                         </div>
                     </div>
                     <%
@@ -85,99 +86,7 @@
     </footer>
 
     <script>
-        const talents = [
-            {
-                email: 'brian.omondi@gmail.com',
-                fullname: 'Brian Omondi',
-                sport: 'Football',
-                dob: '2004-05-14',
-                phone: '+254711223344',
-                achievement: 'Top scorer in Chapa Dimba na Safaricom regional finals',
-                education: 'High School'
-            },
-            {
-                email: 'faith.chepngetich@yahoo.com',
-                fullname: 'Faith Chepngetich',
-                sport: 'Athletics',
-                dob: '2005-08-22',
-                phone: '+254722334455',
-                achievement: 'Gold medal in 1500m at East Africa Secondary School Games',
-                education: 'High School'
-            },
-            {
-                email: 'emmanuel.kiprop@outlook.com',
-                fullname: 'Emmanuel Kiprop',
-                sport: 'Athletics',
-                dob: '2003-11-02',
-                phone: '+254733445566',
-                achievement: 'Represented Kenya in World U20 Athletics Championships',
-                education: 'Undergraduate'
-            },
-            {
-                email: 'mercy.wambui@gmail.com',
-                fullname: 'Mercy Wambui',
-                sport: 'Basketball',
-                dob: '2004-01-30',
-                phone: '+254744556677',
-                achievement: 'MVP at the Kajiado County Secondary Schools Basketball finals',
-                education: 'High School'
-            },
-            {
-                email: 'kevin.otieno@hotmail.com',
-                fullname: 'Kevin Otieno',
-                sport: 'Rugby',
-                dob: '2002-07-19',
-                phone: '+254755667788',
-                achievement: 'Called up to the Kenya 7s (Shujaa) academy squad',
-                education: 'Undergraduate'
-            },
-            {
-                email: 'stacy.mwende@gmail.com',
-                fullname: 'Stacy Mwende',
-                sport: 'Volleyball',
-                dob: '2005-03-12',
-                phone: '+254766778899',
-                achievement: 'Best Setter award at national school games',
-                education: 'High School'
-            },
-            {
-                email: 'david.ndwiga@yahoo.com',
-                fullname: 'David Ndwiga',
-                sport: 'Football',
-                dob: '2003-09-25',
-                phone: '+254777889900',
-                achievement: 'Played for FKF Premier League youth side',
-                education: 'Undergraduate'
-            },
-            {
-                email: 'amina.ali@gmail.com',
-                fullname: 'Amina Ali',
-                sport: 'Hockey',
-                dob: '2004-12-05',
-                phone: '+254788990011',
-                achievement: 'Captain of the national high school champions team',
-                education: 'High School'
-            },
-            {
-                email: 'victor.kamau@gmail.com',
-                fullname: 'Victor Kamau',
-                sport: 'Rugby',
-                dob: '2005-02-17',
-                phone: '+254799001122',
-                achievement: 'Part of the Mwamba RFC youth development program',
-                education: 'High School'
-            },
-            {
-                email: 'joyce.atieno@outlook.com',
-                fullname: 'Joyce Atieno',
-                sport: 'Basketball',
-                dob: '2002-10-10',
-                phone: '+254712345678',
-                achievement: 'Led KPA youth team to regional club victory',
-                education: 'Undergraduate'
-            }
-        ];
-
+       const talents = <%- JSON.stringify(talents) %>;
         function calculateAge(dob) {
             const today = new Date();
             const birthDate = new Date(dob);
@@ -217,6 +126,7 @@
                             <p>📧 ${talent.email}</p>
                             <p>📱 ${talent.phone}</p>
                         </div>
+                        
                     </div>
                 `;
             }).join('');

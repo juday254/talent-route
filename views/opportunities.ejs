@@ -64,108 +64,8 @@
     </footer>
 
     <script>
-        const opportunities = [
-            {
-                id: 1,
-                title: 'Athletics Track & Field Scholarship',
-                description: 'Full athletic scholarship for elite mid-distance runners.',
-                location: 'Oregon, USA',
-                university: 'University of Oregon',
-                requirements: 'Sub 3:45 for 1500m (Men), Sub 4:10 (Women), High school certificate with C+ minimum.',
-                link: 'https://goducks.com/sports/scholarships',
-                type: 'Full Scholarship'
-            },
-            {
-                id: 2,
-                title: 'Elite Basketball Talent Program',
-                description: 'Sports scholarship covering tuition, housing, and training kits.',
-                location: 'Nairobi, Kenya',
-                university: 'United States International University (USIU-A)',
-                requirements: 'Must have played in the national secondary school finals or local league. KCSE C+ and above.',
-                link: 'https://usiu.ac.ke/sports-scholarships',
-                type: 'Full Scholarship'
-            },
-            {
-                id: 3,
-                title: 'Collegiate Rugby Scholarship',
-                description: 'Opportunity to join a premier rugby program with partial academic funding.',
-                location: 'Texas, USA',
-                university: 'Lindenwood University',
-                requirements: 'Video highlights of regional/national matches, reference letter from a certified coach, SAT score of 1050+.',
-                link: 'https://lindenwoodlions.com/apply',
-                type: 'Partial'
-            },
-            {
-                id: 4,
-                title: 'High-Performance Football Scouting',
-                description: 'Full tuition scholarship for exceptionally talented midfielders and forwards.',
-                location: 'Strathmore, Kenya',
-                university: 'Strathmore University',
-                requirements: 'KCSE grade B- and above, trial attendance required, provincial level experience.',
-                link: 'https://strathmore.edu/sports-scholarship',
-                type: 'Full Scholarship'
-            },
-            {
-                id: 5,
-                title: 'NCAA Division 1 Soccer Scholarship',
-                description: 'Full ride soccer scholarship for international student-athletes.',
-                location: 'South Carolina, USA',
-                university: 'Clemson University',
-                requirements: 'NCAA Eligibility Center clearance, TOEFL/IELTS pass, highlight reel.',
-                link: 'https://clemsontigers.com/soccer-recruitment',
-                type: 'Full Scholarship'
-            },
-            {
-                id: 6,
-                title: 'Full Track & Field Athletic Grant',
-                description: 'Sponsorship targeting high-potential sprinters and long-distance runners.',
-                location: 'Texas, USA',
-                university: 'Texas A&M University',
-                requirements: 'IAAF junior rankings or equivalent national times, GPA conversion equivalent to 3.0+.',
-                link: 'https://12thman.com/athletic-scholarships',
-                type: 'Full Scholarship'
-            },
-            {
-                id: 7,
-                title: 'National Volleyball League Talent Hunt',
-                description: 'Sports tuition waiver and monthly stipend for top volleyball setters and blockers.',
-                location: 'Nairobi, Kenya',
-                university: 'Kenyatta University',
-                requirements: 'KCSE C+ minimum, participation in KVF national youth tournaments.',
-                link: 'https://ku.ac.ke/sports',
-                type: 'Partial'
-            },
-            {
-                id: 8,
-                title: 'Elite Field Hockey Academic-Athletic Grant',
-                description: 'Scholarship for outstanding female hockey players.',
-                location: 'Birmingham, UK',
-                university: 'University of Birmingham',
-                requirements: 'A-level equivalent or KCSE B, video portfolio, national youth team caps preferred.',
-                link: 'https://sportandfitness.bham.ac.uk/scholarships',
-                type: 'Full Scholarship'
-            },
-            {
-                id: 9,
-                title: 'College Rugby Development Scholarship',
-                description: 'Scholarship aiming to develop international rugby talent in the US collegiate system.',
-                location: 'California, USA',
-                university: 'Saint Marys College of California',
-                requirements: 'High school graduate, recommendation from national rugby federation (KRU), physical fitness test pass.',
-                link: 'https://stmarys-ca.edu/rugby-recruits',
-                type: 'Development Program'
-            },
-            {
-                id: 10,
-                title: 'Vanguard Basketball Sports Scholarship',
-                description: 'Full athletic waiver for dominant centers and point guards.',
-                location: 'Nairobi, Kenya',
-                university: 'Strathmore University',
-                requirements: 'KCSE C+ and above, elite level high school statistics, mandatory physical tryouts.',
-                link: 'https://strathmore.edu/vanguard-sports',
-                type: 'Full Scholarship'
-            }
-        ];
+        const opportunities = <%- JSON.stringify(opportunities) %>;
+        const user = <%- JSON.stringify(user || null) %>;
 
         function displayOpportunities(data) {
             const container = document.getElementById('opportunitiesContainer');
@@ -189,10 +89,15 @@
                         <p><strong>Location:</strong> ${opp.location}</p>
                         <p><strong>Description:</strong> ${opp.description}</p>
                         <p><strong>Requirements:</strong> ${opp.requirements}</p>
-                        <a href="${opp.link}" target="_blank" class="btn" style="margin-top: 15px; display: inline-block;">Apply Now</a>
+                        <a href="${opp.application_link}" target="_blank" class="btn" style="margin-top:15px; display:inline-block;">Apply Now</a>
+                        ${user && user.role === 'institution' ? `
+                        <form action="/deleteopportunity" method="POST" style="margin-top:10px">
+                            <input type="hidden" name="id" value="${opp.id}">
+                            <button type="submit" class="btn" style="background-color:#ef4444">Delete</button>
+                        </form>` : ''}
                     </div>
                 </div>
-            `).join('');
+        `).join('');
         }
 
         function filterOpportunities() {
